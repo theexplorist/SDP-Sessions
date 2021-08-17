@@ -134,3 +134,145 @@ class Solution {
         return curr.next;
     }
 }
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head, ListNode tail) {
+       
+        //System.out.println(tail.next);
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode revList = head;
+         //System.out.println(head);
+        ListNode toDo = head.next;
+        revList.next = null;
+        
+        while(toDo != tail) {
+            ListNode temp = toDo;
+            //System.out.println(toDo.val + " " + tail.val);
+            toDo = toDo.next;
+            
+            temp.next = revList;
+            revList = temp;
+        }
+        //System.out.println(revList.val);
+        return revList;
+    }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if(head == null) {
+            return null;
+        }
+        ListNode a = head, b = head;
+        
+        for(int i = 0; i < k; i++) {
+            if(b == null) {
+                return head;
+            }
+            b = b.next;
+        }
+        
+        ListNode newHead = reverseList(a, b);
+        a.next = reverseKGroup(b, k);
+        return newHead;
+    }
+}
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    
+    public ListNode reverseList(ListNode head, ListNode tail) {
+       
+        //System.out.println(tail.next);
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode revList = head;
+         //System.out.println(head);
+        ListNode toDo = head.next;
+        revList.next = null;
+        
+        while(toDo != tail) {
+            ListNode temp = toDo;
+            //System.out.println(toDo.val + " " + tail.val);
+            toDo = toDo.next;
+            
+            temp.next = revList;
+            revList = temp;
+        }
+        //System.out.println(revList.val);
+        return revList;
+    }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if(head == null) {
+            return null;
+        }
+        ListNode a = head, b = head;
+        
+        for(int i = 0; i < k; i++) {
+            if(b == null) {
+                return head;
+            }
+            b = b.next;
+        }
+        
+        ListNode newHead = reverseList(a, b);
+        a.next = reverseKGroup(b, k);
+        return newHead;
+    }
+    public ListNode swapPairs(ListNode head) {
+        return reverseKGroup(head, 2);
+    }
+}
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode oddHead = head;
+        ListNode evenHead = head.next;
+        ListNode odd = head;
+        ListNode even = evenHead;
+        
+        while(odd != null && odd.next != null && even != null && even.next != null) {
+            odd.next = odd.next.next;
+            odd = odd.next;
+            
+            even.next = even.next.next;
+            even = even.next;
+        }
+        
+        odd.next = evenHead;
+        
+        return oddHead;
+    }
+}
