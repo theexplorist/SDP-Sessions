@@ -46,3 +46,23 @@ public class DiagonalSorting {
 	}
 
 }
+
+class Solution {
+    Integer [][] memo;
+	public int minimumTotal(List<List<Integer>> triangle) {
+        memo = new Integer[triangle.size()][triangle.size()];
+		int ans = recursion(triangle, 0, 0);
+		return ans;
+	}
+
+	private int recursion(List<List<Integer>> triangle, int row, int column) {
+		if (row == triangle.size())
+			return 0;
+
+        if(memo[row][column] != null)
+            return memo[row][column];
+        
+		return memo[row][column] = Math.min(recursion(triangle, row + 1, column),
+				recursion(triangle, row + 1,column + 1)) + triangle.get(row).get(column);
+	}
+}
