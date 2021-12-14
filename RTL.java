@@ -62,3 +62,38 @@ class Solution {
         return ans;
     }
 }
+//*****
+
+import java.util.Scanner;
+
+public class Main {
+
+	private static int sol(int[] arr, int i, int j) {
+		// TODO Auto-generated method stub
+
+		if(i == j) {
+			return 0;
+		}
+		int min = Integer.MAX_VALUE;
+		for(int k = i; k < j; k++) {
+			int cost = sol(arr, i, k) + sol(arr, k + 1, j) + arr[i - 1] * arr[k] * arr[j];
+			min = Math.min(min, cost);
+		}
+		
+		return min;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		int[] arr = new int[n];
+		for(int i = 0; i < n; i++) {
+			arr[i] = s.nextInt();
+		}
+		
+		int a = sol(arr, 1, arr.length - 1);
+		System.out.println(a);
+	}
+
+}
+
